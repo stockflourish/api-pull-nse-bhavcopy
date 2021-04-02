@@ -1,0 +1,2 @@
+class AWSException(Exception):
+    pass

@@ -6,3 +6,4 @@ dependencies:
   - pip:
       - requests
       - pytest
+      - boto3
