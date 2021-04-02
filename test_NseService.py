@@ -1,6 +1,8 @@
 from unittest import TestCase
 from services.NseService import NseService
 import requests
+import pytest
+from exception.WeekendException import WeekendException
 
 
 class TestNseService(TestCase):
@@ -10,3 +12,8 @@ class TestNseService(TestCase):
 
         assert nse_data_response.status_code == 200
         assert nse_data_response.content is not None
+
+    def test_weekend_exception(self):
+        with pytest.raises(WeekendException):
+            nse_service = NseService(year="2021", month="04", day="03")
+            _ = nse_service.get_data()

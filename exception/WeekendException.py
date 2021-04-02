@@ -1,0 +1,2 @@
+class WeekendException(Exception):
+    pass

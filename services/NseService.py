@@ -1,4 +1,6 @@
 import requests
+from services.DateService import DateService
+from exception.WeekendException import WeekendException
 
 
 class NseService:
@@ -17,6 +19,11 @@ class NseService:
         return self._file_name
 
     def get_data(self) -> requests.Response:
+        date_service = DateService(date_str=self._get_date(), date_format="%d-%m-%Y")
+
+        if date_service.date_time_date.weekday() in (5, 6):
+            raise WeekendException
+
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
                           'Chrome/88.0.4324.150 Safari/537.36 Edg/88.0.705.63',
